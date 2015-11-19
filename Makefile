@@ -1,10 +1,12 @@
-.PHONY: build test test-once
+.PHONY: build build-test test test-once
+
+wait-for-changes = inotifywait -qq -e close_write,moved_to,create .
 
 build:
 	@echo "Yet to be implemented"
 
 test:
-	@echo "Yet to be implemented"
+	@$(wait-for-changes)
 	
 test-once:
-	@echo "Yet to be implemented"
+	@echo "Yet to be implemented" 
