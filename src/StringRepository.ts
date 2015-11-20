@@ -3,6 +3,7 @@
 class StringRepository {
 	private filePath : string;
 	private store: {[index: string] : string};
+	
 	constructor(filePath: string){
 		this.filePath = filePath;
 		this.store = { };
