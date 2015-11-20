@@ -1,10 +1,10 @@
 "use strict";
 
 class StringRepository {
-	private name : string;
+	private filePath : string;
 	
-	constructor(name: string){
-		this.name = name;
+	constructor(filePath: string){
+		this.filePath = filePath;
 	}
 	
 	public saveByKey(key: string, value : string) : void {
