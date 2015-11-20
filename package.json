@@ -1,0 +1,17 @@
+{
+  "name": "local-database",
+  "version": "0.1.0",
+  "description": "Node.js local database",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "author": "Ignatius",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "chai": "^3.4.1"
+  }
+}
