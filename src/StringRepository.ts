@@ -9,7 +9,7 @@ class StringRepository {
 		this.store = { };
 	}
 	
-	public saveByKey(key: string, value : string) : void {
+	public async saveByKey(key: string, value : string) : Promise<void> {
 		this.store[key] = value;
 	}
 	
