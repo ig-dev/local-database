@@ -1,4 +1,4 @@
-.PHONY: test 
+.PHONY: test test-once
 
 wait-for-changes = inotifywait -qq -e close_write,moved_to,create test/ src/
 
