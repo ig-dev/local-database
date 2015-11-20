@@ -9,6 +9,7 @@ test:
 	
 test-once:
 	@echo "Building..."
+	@rm -Rf test-build/test/
 	@$(build-test)
 	@reset;
 	@mocha test-build/test
