@@ -4,4 +4,12 @@ export default class StringRepository {
 	constructor(name: string){
 		this.name = name;
 	}
+	
+	public saveByKey(key: string, value : string) : void {
+		
+	}
+	
+	public fetchByKey(key: string) : string {
+		return "";
+	}
 }
