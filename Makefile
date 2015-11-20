@@ -1,12 +1,14 @@
-.PHONY: build build-test test test-once
+.PHONY: test 
 
-wait-for-changes = inotifywait -qq -e close_write,moved_to,create .
+wait-for-changes = inotifywait -qq -e close_write,moved_to,create test/ src/
 
-build:
-	@echo "Yet to be implemented"
+build-test = tsc --outDir test-build/ --rootDir ./ --project test/;
 
 test:
-	@$(wait-for-changes)
+	@while : ; do make test-and-wait --quiet; done
 	
-test-once:
-	@echo "Yet to be implemented" 
+test-and-wait:
+	@echo "Building..."
+	@$(build-test)
+	@mocha test-build/test
+	@$(wait-for-changes)
