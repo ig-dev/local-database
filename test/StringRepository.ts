@@ -9,12 +9,12 @@ describe("Constructor", () => {
 		new StringRepository("foo");
 	});
 	
-	it("can fetch after saving", () => {
+	it("can fetch after saving", async () => {
 		var KEY : string = "fookey";
 		var VALUE : string = "fooval";
 		var repository : StringRepository = new StringRepository("foo");
 		repository.saveByKey(KEY, VALUE);
-		var result :string = repository.fetchByKey(KEY);
+		var result :string = await repository.fetchByKey(KEY);
 		expect(result).to.equal(VALUE);
 	});
 });

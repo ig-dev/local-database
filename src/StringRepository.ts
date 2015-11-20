@@ -1,4 +1,6 @@
-export default class StringRepository {
+"use strict";
+
+class StringRepository {
 	private name : string;
 	
 	constructor(name: string){
@@ -9,7 +11,9 @@ export default class StringRepository {
 		
 	}
 	
-	public fetchByKey(key: string) : string {
+	public async fetchByKey(key: string) : Promise<string> {
 		return "";
 	}
 }
+
+export default StringRepository;
