@@ -1,3 +1,4 @@
+"use strict";
 import EntryValue from './EntryValue';
 
 abstract class Entry {
