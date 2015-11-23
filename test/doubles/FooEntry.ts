@@ -1,6 +1,6 @@
-import Enrty from '../../src/Entry';
+import Entry from '../../src/Entry';
 
-class FooEntry extends Enrty {
+class FooEntry extends Entry {
 	foo: string = "foo value";
 	bar: string = "bar value";
 	baz: number = 5.5;
