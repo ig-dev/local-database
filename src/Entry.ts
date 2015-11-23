@@ -1,5 +1,7 @@
+import EntryValue from './EntryValue';
+
 abstract class Entry {
-	[index: string] : number | string | boolean;
+	[index: string] : EntryValue;
 	public id: number;
 }
 
