@@ -6,14 +6,14 @@ build-test = tsc --outDir test-build/ --rootDir ./ --project test/;
 
 test:
 	@while : ; do \
-	make test-once --quiet & \
-	$(wait-for-changes); \
-	kill $$!; \
+		make test-once --quiet & \
+		$(wait-for-changes); \
+		kill $$!; \
 	done
 	
 test-once:
 	@echo "Building..."
 	@rm -Rf test-build/test/
 	@$(build-test)
-	@reset;
+	clear;
 	@mocha test-build/test
