@@ -1,8 +1,11 @@
 /// <reference path="./typings/tsd.d.ts" />
 
+import * as fs from 'fs';
 import {expect} from 'chai';
 import StringRepository from '../src/StringRepository';
 
+var repositoryPath: string = './test/repositories/foo';
+	
 interface Dictionary {
 	[index: string] : string
 }
@@ -25,7 +28,11 @@ async function populateRepository(repository : StringRepository, values: Diction
 }
 
 function createRepository() : StringRepository {
-	return new StringRepository("foo");
+	return new StringRepository(repositoryPath);
+}
+
+function deleteRepositoryFile() : void {
+	fs.unlinkSync(repositoryPath);
 }
 
 describe("Constructor", () => {
@@ -34,9 +41,10 @@ describe("Constructor", () => {
 	});
 	
 	it("can fetch non-persitently after saving", async () => {
+		deleteRepositoryFile();
+		var repository : StringRepository = createRepository();
 		var values : Dictionary = getSomeKeysAndValues();
-		var repository : StringRepository = createRepository()
-		populateRepository(repository, values);
+		await populateRepository(repository, values);
 
 		for (var key in values) {
 			var result: string = await repository.fetchByKey(key);
@@ -45,9 +53,10 @@ describe("Constructor", () => {
 	});
 	
 	it("can fetch persitently after saving", async () => {
+		deleteRepositoryFile();
 		var values : Dictionary = getSomeKeysAndValues();
 		var repository : StringRepository = createRepository()
-		populateRepository(repository, values);
+		await populateRepository(repository, values);
 		repository = createRepository()
 		for (var key in values) {
 			var result: string = await repository.fetchByKey(key);

@@ -9,6 +9,34 @@ class StringRepository {
 	
 	constructor(filePath: string){
 		this.filePath = filePath;
+		this.initializeStore()
+	}
+	
+	private initializeStore() : void {
+		try {
+			this.loadStorageFile()
+		} catch (error) {
+			this.initializeEmptyStore();
+		}
+	}
+	
+	private loadStorageFile() : void {
+		var fileContent: string = fs.readFileSync(this.filePath, 'utf8');
+		this.store = JSON.parse(fileContent);
+	}
+
+	private storageFileExists () : boolean {
+		var fileExists: boolean = true;
+		try {
+			fs.accessSync(this.filePath)
+			return fileExists;
+		} catch (error) {
+			fileExists = false;
+			return fileExists;
+		}
+	}
+		
+	private initializeEmptyStore() {
 		this.store = { };
 	}
 	
@@ -26,8 +54,12 @@ class StringRepository {
 		await this.persistAll();
 	}
 	
-	private async persistAll() : Promise<void> {
-		return;
+	private persistAll() : Promise<void> {
+		return new Promise<void>((resolve, reject) => {
+			var fileContent: string = JSON.stringify(this.store);
+			fs.writeFileSync(this.filePath, fileContent);
+			return resolve();
+		});
 	}
 }
 
