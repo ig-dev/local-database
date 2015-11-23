@@ -2,7 +2,7 @@ import SerializedProperty from './SerializedProperty';
 
 class Serialized {
 	properties: {
-		[index: string] : SerializedProperty
+		[index: number] : SerializedProperty
 	}
 }
 

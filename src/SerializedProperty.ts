@@ -1,7 +1,7 @@
 import EntryValue from './EntryValue';
 
 interface SerializedProperty {
-	className: string;
+	valueName: string;
 	value: EntryValue;
 }
 
