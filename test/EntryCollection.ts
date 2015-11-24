@@ -23,5 +23,16 @@ describe("EntryCollection", () => {
 		var all: Array<FooEntry> = collection.getAll();
 		expect(all).to.include(firstEntry);
 		expect(all).to.include(secondEntry);
+		
+		var retrieved = collection.getById(1);
+		expect(retrieved).to.deep.equal(firstEntry);
+		retrieved = collection.getById(2);
+		expect(retrieved).to.deep.equal(secondEntry);
+		
+		expect(()=>{ collection.getById(3)}).to.throw();
+		
+		collection.removeById(1);
+		all = collection.getAll();
+		expect(all).to.deep.equal([secondEntry]);
 	});
 });

@@ -16,6 +16,25 @@ class EntryCollection <EntryClass extends Entry> {
 	getAll() : Array<EntryClass> {
 		return this.entries;
 	}
+	
+	getById(id: number) {
+		var entry: EntryClass;
+		for(entry of this.entries){
+			if(entry.id === id) {
+				return entry;
+			}
+		}
+		throw new Error("Entry with ID " + id + " does not exist.");
+	}
+	
+	removeById(id: number) {
+		for(var i = 0; i < this.entries.length; i++) {
+			if(this.entries[i].id === id) {
+				this.entries.splice(i, 1);
+				return;
+			}
+		}
+	}
 }
 
 export default EntryCollection;
