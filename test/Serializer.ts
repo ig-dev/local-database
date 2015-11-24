@@ -39,7 +39,7 @@ fooExpectation.entries.push({
 });
 
 describe("Serializer", () => {
-	it("serializes basic Entry properties", () => {
+	it("serializes Entry properties and relationships", () => {
 		var serializer : Serializer = new Serializer();
 		var serialized = serializer.serialize(entry);
 		expect(serialized).to.deep.equal(fooExpectation);
