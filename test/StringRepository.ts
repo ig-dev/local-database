@@ -32,16 +32,23 @@ function createRepository() : StringRepository {
 }
 
 function deleteRepositoryFile() : void {
-	fs.unlinkSync(repositoryPath);
+	try
+	{
+		fs.unlinkSync(repositoryPath);
+	} catch (notFoundError) {
+		// ignore
+	}
 }
 
 describe("Constructor", () => {
+	afterEach(() => {
+		deleteRepositoryFile();
+	});
 	it("can be created", () => {
 		createRepository()
 	});
 	
 	it("can fetch non-persitently after saving", async () => {
-		deleteRepositoryFile();
 		var repository : StringRepository = createRepository();
 		var values : Dictionary = getSomeKeysAndValues();
 		await populateRepository(repository, values);
@@ -53,7 +60,6 @@ describe("Constructor", () => {
 	});
 	
 	it("can fetch persitently after saving", async () => {
-		deleteRepositoryFile();
 		var values : Dictionary = getSomeKeysAndValues();
 		var repository : StringRepository = createRepository()
 		await populateRepository(repository, values);
