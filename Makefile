@@ -4,6 +4,8 @@ wait-for-changes = inotifywait -qq -e close_write,moved_to,create test/ src/
 
 build-test = tsc --outDir test-build/ --rootDir ./ --project test/;
 
+prepare-test = mkdir test/repositories -p
+
 test:
 	@while : ; do \
 		make test-once --quiet & \
@@ -13,6 +15,7 @@ test:
 	
 test-once:
 	@echo "Building..."
+	@$(prepare-test)
 	@rm -Rf test-build/test/
 	@$(build-test)
 	clear;
