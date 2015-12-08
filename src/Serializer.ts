@@ -1,6 +1,8 @@
 "use strict";
 import Entry from "./Entry";
+import EntryCollection from "./EntryCollection";
 import Serialized from "./Serialized";
+
 
 class Serializer {
 	serialize(entry: Entry) : Serialized {
@@ -13,6 +15,14 @@ class Serializer {
 					property: key,
 					className: Object.getPrototypeOf(relationship).constructor.className,
 					id: relationship.id
+				});
+			}
+			else if (entry[key] instanceof EntryCollection) {
+				var collection : EntryCollection<Entry> = <EntryCollection<Entry>> entry[key];
+				serialized.collections.push({
+					property: key,
+					className: collection.getClassName(),
+					ids: collection.getIds()
 				});
 			}
 			else {

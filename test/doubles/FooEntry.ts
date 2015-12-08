@@ -1,5 +1,6 @@
 "use strict";
 import Entry from '../../src/Entry';
+import EntryCollection from '../../src/EntryCollection';
 
 class FooEntry extends Entry {
 	static className: string = "FooEntry";
@@ -9,6 +10,7 @@ class FooEntry extends Entry {
 	bar: string = "bar value";
 	baz: number = 5.5;
 	fooEntry: FooEntry;
+	fooCollection: EntryCollection<FooEntry>;
 	
 	constructor() {
 		super();

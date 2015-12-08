@@ -19,6 +19,7 @@ class EntryUtility {
 		this.spawnNew();
 		this.assignProperties();
 		this.assignRelationships();
+		this.assignCollections();
 	}
 	
 	private spawnNew() : void {
@@ -56,6 +57,27 @@ class EntryUtility {
 		relationship.id = Math.floor(Math.random() * 100000);
 		return relationship;
 	}
+	
+	private assignCollections() : void {
+		var collection : EntryCollection<FooEntry> = this.createCollection();
+		this.entry.fooCollection = collection;
+		this.serialized.collections.push({
+			property: "fooCollection",
+			className: "FooEntry",
+			ids: collection.getIds()
+		});
+	}
+	
+	
+	private createCollection() : EntryCollection<FooEntry> {
+		var collection : EntryCollection<FooEntry> = new EntryCollection<FooEntry>(FooEntry);
+		for(var i = 0; i < 5; i++) {
+			collection.add(this.createRandomRelationship());
+		}
+		return collection;
+	}
+	
+
 }
 
 export default EntryUtility;

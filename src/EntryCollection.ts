@@ -9,15 +9,19 @@ class EntryCollection <EntryClass extends Entry> {
 		this.className = EntryClass.className;
 	}
 	
-	add(entry: EntryClass) : void {
+	public getClassName() : string {
+		return this.className;
+	}
+	
+	public add(entry: EntryClass) : void {
 		this.entries.push(entry);
 	}
 	
-	getAll() : Array<EntryClass> {
+	public getAll() : Array<EntryClass> {
 		return this.entries;
 	}
 	
-	getById(id: number) {
+	public getById(id: number) {
 		var entry: EntryClass;
 		for(entry of this.entries){
 			if(entry.id === id) {
@@ -27,13 +31,21 @@ class EntryCollection <EntryClass extends Entry> {
 		throw new Error("Entry with ID " + id + " does not exist.");
 	}
 	
-	removeById(id: number) {
+	public removeById(id: number) {
 		for(var i = 0; i < this.entries.length; i++) {
 			if(this.entries[i].id === id) {
 				this.entries.splice(i, 1);
 				return;
 			}
 		}
+	}
+	
+	public getIds() : Array<number> {
+		var ids : Array<number> = [];
+		for(var i = 0; i < this.entries.length; i++) {
+			ids.push(this.entries[i].id);
+		}
+		return ids;
 	}
 }
 
