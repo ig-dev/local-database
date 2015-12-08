@@ -27,13 +27,13 @@ class Serializer {
 		
 	serializeCurrentProperty() {
 		if(this.isRelationship(this.currentValue)) {
-			this.serializeRelationship(<Entry> this.currentValue);
+			this.serializeAsRelationship(<Entry> this.currentValue);
 		}
 		else if (this.isCollection(this.currentValue)) {
-			this.serializeCollection(<EntryCollection<Entry>> this.currentValue);
+			this.serializeAsCollection(<EntryCollection<Entry>> this.currentValue);
 		}
 		else {
-			this.serializeProperty(this.currentValue)
+			this.serializeAsProperty(this.currentValue)
 		}
 	}
 	
@@ -45,7 +45,7 @@ class Serializer {
 		return isRelationship;
 	}
 
-	private serializeRelationship (relationship: Entry) {
+	private serializeAsRelationship (relationship: Entry) {
 		this.serialized.entries.push({
 			property: this.currentPropertyName,
 			className: Object.getPrototypeOf(relationship).constructor.className,
@@ -61,7 +61,7 @@ class Serializer {
 		return isCollection;
 	}
 	
-	private serializeCollection (collection: EntryCollection<Entry>) {
+	private serializeAsCollection (collection: EntryCollection<Entry>) {
 		this.serialized.collections.push({
 			property: this.currentPropertyName,
 			className: collection.getClassName(),
@@ -69,7 +69,7 @@ class Serializer {
 		});
 	}
 	
-	private serializeProperty(propertyValue : EntryValue) {
+	private serializeAsProperty(propertyValue : EntryValue) {
 		this.serialized.properties.push({
 			property: this.currentPropertyName,
 			value: propertyValue
